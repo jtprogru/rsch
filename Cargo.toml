@@ -1,0 +1,27 @@
+[package]
+name = "rsch"
+version = "0.1.0"
+edition = "2021"
+authors = ["Mikhail Savin <jtprogru@gmail.com>"]
+license = "WTFPL"
+readme = "README.md"
+
+[dependencies]
+rand = "0.9.0"
+structopt = "0.3.26"
+anyhow = "1.0.95"
+clap = { version = "4.5.27", features = ["derive"] }
+env_logger = "0.11.6"
+log = { version = "0.4.25", features = [
+    "max_level_debug",
+    "release_max_level_debug",
+    "std",
+] }
+tokio = { version = "1.43.0", features = ["full"] }
+
+# standard crate data is left out
+[dev-dependencies]
+pretty_assertions = "1"
+assert_cmd = "2.0.14"
+assert_fs = "1.1.2"
+predicates = "3.1.0"
