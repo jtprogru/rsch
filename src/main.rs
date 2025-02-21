@@ -17,7 +17,6 @@ pub struct Cli {
 }
 
 pub fn pass_gen(length: usize, include_digits: bool, include_specials: bool) -> String {
-
     let charset_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let charset_lower = "abcdefghijklmnopqrstuvwxyz";
     let charset_digits = "0123456789";
@@ -35,7 +34,7 @@ pub fn pass_gen(length: usize, include_digits: bool, include_specials: bool) -> 
 
     if alphabet.is_empty() {
         eprintln!("Error: alphabet is empty");
-        "";
+        let _ = "";
     }
 
     let mut rng = rand::rng();
@@ -50,7 +49,7 @@ pub fn pass_gen(length: usize, include_digits: bool, include_specials: bool) -> 
 fn main() {
     let args = Cli::from_args();
     let password = pass_gen(args.length, args.include_digits, args.include_specials);
-    println!("Password:\n{}", password)
+    println!("Password:\n\n{}", password)
 }
 
 #[cfg(test)]
@@ -64,7 +63,13 @@ mod tests {
         let include_digits = false;
         let include_specials = false;
         let password = pass_gen(length, include_digits, include_specials);
-        assert_eq!(password.len(), length, "Length password not equal got {} want {}", password.len(), length );
+        assert_eq!(
+            password.len(),
+            length,
+            "Length password not equal got {} want {}",
+            password.len(),
+            length
+        );
     }
 
     #[test]
@@ -73,7 +78,10 @@ mod tests {
         let include_digits = true;
         let include_specials = false;
         let password = pass_gen(length, include_digits, include_specials);
-        assert!(password.chars().any(|c| c.is_numeric()), "Password is not contains a digits");
+        assert!(
+            password.chars().any(|c| c.is_numeric()),
+            "Password is not contains a digits"
+        );
     }
 
     #[test]
@@ -110,7 +118,8 @@ mod tests {
         let length = 16;
         let include_digits = false;
         let include_specials = false;
-        let result = std::panic::catch_unwind(|| pass_gen(length, include_digits, include_specials));
+        let result =
+            std::panic::catch_unwind(|| pass_gen(length, include_digits, include_specials));
         assert!(result.is_ok(), "Function don't panic");
     }
 }
