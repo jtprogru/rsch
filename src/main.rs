@@ -51,7 +51,7 @@
 #![warn(missing_docs)]
 
 use clap::Parser;
-use rand::Rng;
+use rand::RngExt;
 
 /// Заглавные латинские буквы. ASCII-only — благодаря этому корректна
 /// побайтовая индексация в [`pass_gen`].
